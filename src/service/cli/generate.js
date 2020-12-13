@@ -7,6 +7,7 @@ const {
 const fs = require(`fs`);
 
 const DEFAULT_COUNT = 1;
+const MAX_COUNT = 1000;
 const FILE_NAME = `mocks.json`;
 
 const TITLES = [
@@ -53,7 +54,6 @@ const OfferType = {
   SALE: `sale`,
 };
 
-
 const SumRestrict = {
   MIN: 1000,
   MAX: 100000,
@@ -64,15 +64,11 @@ const PictureRestrict = {
   MAX: 16,
 };
 
-const getPictureFileName = () => {
-  return `item${getRandomInt(PictureRestrict.MIN, PictureRestrict.MAX)}.jpg`;
-};
-
 const generateOffers = (count) => (
   Array(count).fill({}).map(() => ({
-    category: [CATEGORIES[getRandomInt(0, CATEGORIES.length - 1)]],
-    description: shuffle(DESCRIPTIONS).slice(1, 5).join(` `),
-    picture: getPictureFileName(),
+    category: shuffle(CATEGORIES).slice(0, getRandomInt(1, CATEGORIES.length - 1)),
+    description: shuffle(DESCRIPTIONS).slice(0, getRandomInt(1, 4)).join(` `),
+    picture: `item${getRandomInt(PictureRestrict.MIN, PictureRestrict.MAX)}.jpg`,
     title: TITLES[getRandomInt(0, TITLES.length - 1)],
     type: Object.keys(OfferType)[Math.floor(Math.random() * Object.keys(OfferType).length)],
     sum: getRandomInt(SumRestrict.MIN, SumRestrict.MAX),
@@ -84,7 +80,7 @@ module.exports = {
   run(args) {
     const [count] = args;
     const countOffer = Number.parseInt(count, 10) || DEFAULT_COUNT;
-    if (countOffer > 1000) {
+    if (countOffer > MAX_COUNT) {
       console.log(`Не больше 1000 объявлений`);
       process.exit();
     }
