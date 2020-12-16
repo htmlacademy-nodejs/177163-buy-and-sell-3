@@ -21,7 +21,8 @@
   "homepage": "https://github.com/CM0139/177163-buy-and-sell-3#readme",
   "devDependencies": {
     "eslint": "7.15.0",
-    "eslint-config-htmlacademy": "0.6.0"
+    "eslint-config-htmlacademy": "0.6.0",
+    "nodemon": "2.0.6"
   },
   "dependencies": {
     "chalk": "4.1.0"
