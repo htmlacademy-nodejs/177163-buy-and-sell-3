@@ -1,6 +1,6 @@
 'use strict';
 
-const chalk = require("chalk");
+const chalk = require(`chalk`);
 
 const HELP_TEXT = `
 Программа запускает http-сервер и формирует файл с данными для API.
